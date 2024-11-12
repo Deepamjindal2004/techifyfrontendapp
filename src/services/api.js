@@ -1,3 +1,4 @@
+// src/services/api.js
 import axios from 'axios';
 
 // Set Axios default base URL
@@ -13,6 +14,11 @@ export const getToken = () => {
   return localStorage.getItem('token');
 };
 
+// Function to remove token from local storage (e.g., on logout)
+export const removeToken = () => {
+  localStorage.removeItem('token');
+};
+
 // Add Authorization header to Axios requests if token exists
 axios.interceptors.request.use(
   (config) => {
@@ -26,3 +32,5 @@ axios.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+export default axios;

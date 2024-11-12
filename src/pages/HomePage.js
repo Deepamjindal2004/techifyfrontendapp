@@ -1,10 +1,38 @@
-import React from 'react';
+// src/pages/HomePage.js
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from '../services/api';
+import '../css/HomePage.css';
 
 const HomePage = () => {
+  const [ads, setAds] = useState([]);
+
+  useEffect(() => {
+    const fetchAds = async () => {
+      try {
+        const response = await axios.get('/ads');
+        setAds(response.data);
+      } catch (error) {
+        console.error('Error fetching ads:', error);
+      }
+    };
+
+    fetchAds();
+  }, []);
+
   return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
-      <p>Explore the app and register or login to access more features.</p>
+    <div className="home-page">
+      <h1>All Listings</h1>
+      <div className="ads-list">
+        {ads.map((ad) => (
+          <div className="ad-card" key={ad._id}>
+            <h3>{ad.title}</h3>
+            <p>{ad.description.length > 100 ? `${ad.description.substring(0, 100)}...` : ad.description}</p>
+            <p className="price">Price: ${ad.price}</p>
+            <Link to={`/ad/${ad._id}`} className="view-details-button">View Details</Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

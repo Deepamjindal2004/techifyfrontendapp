@@ -1,7 +1,9 @@
+// src/pages/LoginPage.js
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import axios from '../services/api';
+import { useNavigate, Link } from 'react-router-dom';
 import '../css/LoginPage.css';
+import { setToken } from '../services/api';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -9,45 +11,47 @@ const LoginPage = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/users/login', { username, password });
+      const response = await axios.post('/users/login', { username, password });
       if (response.status === 200) {
-        const token = response.data.token;
-        localStorage.setItem('token', token); // Store token in localStorage
-        navigate('/dashboard'); // Redirect after successful login
+        setToken(response.data.token); // Store token in localStorage
+        navigate('/'); // Redirect to home page after successful login
+      } else {
+        setError('Invalid credentials');
       }
     } catch (err) {
-      console.error('Login failed:', err);
-      setError('Invalid credentials.');
+      console.error('Login error:', err);
+      if (err.response && err.response.data && err.response.data.message) {
+        setError(err.response.data.message);
+      } else {
+        setError('Login failed. Please try again.');
+      }
     }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Username:</label>
-          <input 
-            type="text" 
-            value={username} 
-            onChange={(e) => setUsername(e.target.value)} 
-            required 
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            required 
-          />
-        </div>
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h2>Login</h2>
+        <label>Username:</label>
+        <input 
+          type="text" 
+          value={username} 
+          onChange={(e) => setUsername(e.target.value)} 
+          required 
+        />
+        <label>Password:</label>
+        <input 
+          type="password" 
+          value={password} 
+          onChange={(e) => setPassword(e.target.value)} 
+          required 
+        />
         <button type="submit">Login</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p>{error}</p>}
+        <Link to="/register" className="redirect-link">Don't have an account? Register here</Link>
       </form>
     </div>
   );
