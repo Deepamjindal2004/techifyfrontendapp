@@ -1,5 +1,15 @@
 // src/utils/auth.js
 
+// Function to set user data in localStorage
+export const setUser = (user) => {
+    localStorage.setItem('user', JSON.stringify(user));
+  };
+  
+  // Function to get user data from localStorage
+  export const getUser = () => {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  };
 // Function to set token in localStorage
 export const setToken = (token) => {
     localStorage.setItem('token', token);

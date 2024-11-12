@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from '../services/api';
 import '../css/AdForm.css';
-import { isAuthenticated } from '../utils/auth';
+
 
 const AdForm = () => {
   const { id } = useParams(); // If id exists, it's an edit form
