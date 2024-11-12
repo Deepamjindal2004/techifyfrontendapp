@@ -7,7 +7,6 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
-    // Check for user in localStorage
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem('user'));
         if (storedUser) {
@@ -15,25 +14,37 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
 
-    // Login function
-    const login = async (email, password) => {
+    // Register function
+    const register = async (username, email, password) => {
         try {
-            const response = await axios.post('http://localhost:5000/auth/login', { email, password });
-            localStorage.setItem('user', JSON.stringify(response.data));
-            setUser(response.data);
+            const response = await axios.post('http://localhost:5000/api/users/register', { username, email, password });
+            
+            // Ensure response.data exists before setting user
+            if (response && response.data && response.data.user) {
+                setUser(response.data.user);
+                localStorage.setItem('user', JSON.stringify(response.data.user));
+            } else {
+                console.error("Unexpected response structure:", response);
+            }
         } catch (error) {
-            console.error('Login failed:', error);
+            console.error('Registration failed:', error.response?.data?.message || error.message);
         }
     };
 
-    // Register function
-    const register = async (email, password) => {
+    // Login function
+    const login = async (username, password) => {
         try {
-            const response = await axios.post('http://localhost:5000/auth/register', { email, password });
-            setUser(response.data);
-            localStorage.setItem('user', JSON.stringify(response.data));
+            const response = await axios.post('http://localhost:5000/api/users/login', { username, password });
+    
+            // Ensure response.data exists before accessing token
+            if (response && response.data && response.data.token) {
+                setUser(response.data.token);
+                localStorage.setItem('user', JSON.stringify(response.data.token));
+            } else {
+                console.error("Unexpected response structure:", response);
+            }
         } catch (error) {
-            console.error('Registration failed:', error);
+            console.error('Login failed:', error.response?.data?.message || error.message);
         }
     };
 
@@ -44,7 +55,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, register, logout }}>
+        <AuthContext.Provider value={{ user, register, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
