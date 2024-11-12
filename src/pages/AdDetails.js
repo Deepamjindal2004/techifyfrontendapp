@@ -54,6 +54,7 @@ const AdDetails = () => {
         <p>{ad.description}</p>
         <p className="price">Price: ${ad.price}</p>
         <p className="dates">Available until: {new Date(ad.endDate).toLocaleDateString()}</p>
+        {ad.image && <img src={ad.image} alt={ad.title} className="ad-image" />}
         <div className="ad-actions">
           <button onClick={handleSendMessage}>Send Message</button>
           <button onClick={handleBuyItem}>Buy Item</button>

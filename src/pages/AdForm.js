@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from '../services/api';
 import '../css/AdForm.css';
 
-
 const AdForm = () => {
   const { id } = useParams(); // If id exists, it's an edit form
   const navigate = useNavigate();
@@ -12,11 +11,14 @@ const AdForm = () => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
     if (id) {
       const fetchAd = async () => {
+        setLoading(true);
         try {
           const response = await axios.get(`/ads/${id}`);
           const ad = response.data;
@@ -32,9 +34,12 @@ const AdForm = () => {
           setDescription(ad.description);
           setPrice(ad.price);
           setEndDate(ad.endDate.slice(0, 10)); // Format date for input
+          setImage(ad.image);
         } catch (error) {
           console.error('Error fetching ad:', error);
           setError('Failed to load ad details.');
+        } finally {
+          setLoading(false);
         }
       };
 
@@ -44,8 +49,17 @@ const AdForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      const adData = { title, description, price, endDate };
+      const adData = new FormData();
+      adData.append('title', title);
+      adData.append('description', description);
+      adData.append('price', price);
+      adData.append('endDate', endDate);
+      if (image) {
+        adData.append('image', image);
+      }
+
       if (id) {
         // Update existing ad
         await axios.put(`/ads/${id}`, adData);
@@ -58,8 +72,18 @@ const AdForm = () => {
     } catch (err) {
       console.error('Error submitting ad:', err);
       setError('An error occurred while submitting the ad.');
+    } finally {
+      setLoading(false);
     }
   };
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   if (id && error) {
     return <p className="error">{error}</p>;
@@ -100,6 +124,13 @@ const AdForm = () => {
           value={endDate} 
           onChange={(e) => setEndDate(e.target.value)} 
           required 
+        />
+
+        <label>Image:</label>
+        <input 
+          type="file" 
+          onChange={handleImageChange} 
+          accept="image/*"
         />
 
         <button type="submit">{id ? 'Update Ad' : 'Create Ad'}</button>
