@@ -1,65 +1,43 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './RegisterPage.css';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
-
-  const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
-  const validatePassword = (password) => 
-    password.length >= 8 &&
-    /[A-Z]/.test(password) &&
-    /[a-z]/.test(password) &&
-    /\d/.test(password) &&
-    /[^A-Za-z0-9]/.test(password);
+  const navigate = useNavigate(); // Corrected usage of navigate instead of history.push
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.');
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      setError('Please enter a valid email address.');
-      return;
-    }
-
-    if (!validatePassword(password)) {
-      setError('Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.');
-      return;
-    }
-
-    setIsLoading(true);
     try {
+      // Sending data to API for registration
       const response = await axios.post('http://localhost:3000/api/users/register', { username, password, email });
-      if (response.status === 201) {
-        navigate('/login');
+
+      // Check if the registration was successful
+      if (response.status === 201) {  // 201 is the standard success code for resource creation
+        navigate('/login'); // Redirect to login page after successful registration
       } else {
         setError('Registration failed. Please try again.');
       }
     } catch (err) {
+      // Log the error for debugging purposes
       console.error('Error during registration:', err);
-      setError(err.response?.data?.message || 'An error occurred during registration.');
-    } finally {
-      setIsLoading(false);
+
+      // Check if the error has a response from the backend
+      if (err.response && err.response.data) {
+        setError(err.response.data.message || 'Registration failed. Please try again.');
+      } else {
+        setError('Registration failed or error occurred.');
+      }
     }
   };
 
   return (
-    <div className="register-container">
+    <div>
       <h2>Register</h2>
-      <form onSubmit={handleSubmit} className="register-form">
+      <form onSubmit={handleSubmit}>
         <div>
           <label>Username:</label>
           <input 
@@ -81,26 +59,14 @@ const RegisterPage = () => {
         <div>
           <label>Password:</label>
           <input 
-            type={showPassword ? "text" : "password"} 
+            type="password" 
             value={password} 
             onChange={(e) => setPassword(e.target.value)} 
             required 
           />
-          <button type="button" onClick={() => setShowPassword(!showPassword)}>
-            {showPassword ? 'Hide' : 'Show'}
-          </button>
         </div>
-        <div>
-          <label>Confirm Password:</label>
-          <input 
-            type={showPassword ? "text" : "password"} 
-            value={confirmPassword} 
-            onChange={(e) => setConfirmPassword(e.target.value)} 
-            required 
-          />
-        </div>
-        <button type="submit" disabled={isLoading}>{isLoading ? 'Registering...' : 'Register'}</button>
-        {error && <p className="error-message">{error}</p>}
+        <button type="submit">Register</button>
+        {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
       </form>
     </div>
   );
