@@ -11,7 +11,7 @@ function App() {
       <Navbar />
       <div className="container">
         <Routes>
-          <Route path="/" exact element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Routes>

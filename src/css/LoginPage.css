@@ -1,42 +1,80 @@
-/* LoginPage.css */
+/* Login Page Styles */
 .login-container {
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f6f9;
+  }
+  
+  .login-form {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 30px;
     border-radius: 8px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 28px;
+  }
+  
+  label {
+    font-size: 16px;
+    color: #7f8c8d;
     margin-bottom: 5px;
-}
-
-.form-group input {
+  }
+  
+  input {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-button {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  input:focus {
+    border-color: #2980b9;
+    outline: none;
+  }
+  
+  button {
     width: 100%;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
+    padding: 14px;
+    font-size: 16px;
+    color: white;
+    background-color: #2980b9;
     border: none;
-    border-radius: 4px;
-}
-
-button:hover {
-    background-color: #555;
-}
-
-.error {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #3498db;
+  }
+  
+  p {
     color: red;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .forgot-password {
+    display: block;
+    text-align: center;
+    color: #2980b9;
     margin-top: 10px;
-}
+    font-size: 14px;
+  }
+  
+  .forgot-password:hover {
+    text-decoration: underline;
+  }
+  

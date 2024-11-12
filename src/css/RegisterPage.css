@@ -1,43 +1,80 @@
+/* Register Page Styles */
 .register-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f6f9;
   }
   
-  .register-form div {
-    margin-bottom: 15px;
-  }
-  
-  .register-form label {
-    display: block;
-    font-weight: bold;
-  }
-  
-  .register-form input {
+  .register-form {
     width: 100%;
-    padding: 8px;
-    margin-top: 5px;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 28px;
+  }
+  
+  label {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
     box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  input:focus {
+    border-color: #2980b9;
+    outline: none;
   }
   
   button {
-    padding: 8px 12px;
-    background-color: #4CAF50;
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
     color: white;
+    background-color: #27ae60;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
-  button:disabled {
-    background-color: #ddd;
+  button:hover {
+    background-color: #2ecc71;
   }
   
-  .error-message {
+  p {
     color: red;
-    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .login-link {
+    display: block;
+    text-align: center;
+    color: #2980b9;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
+  .login-link:hover {
+    text-decoration: underline;
   }
   
