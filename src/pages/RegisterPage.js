@@ -1,7 +1,7 @@
-// src/pages/RegisterPage.js
 import React, { useState } from 'react';
 import axios from '../services/api';
 import { useNavigate, Link } from 'react-router-dom';
+import zxcvbn from 'zxcvbn';
 import '../css/RegisterPage.css';
 
 const RegisterPage = () => {
@@ -9,7 +9,15 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
+  const [passwordStrength, setPasswordStrength] = useState('');
   const navigate = useNavigate();
+
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    const strength = zxcvbn(newPassword);
+    setPasswordStrength(strength.score);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +35,23 @@ const RegisterPage = () => {
       } else {
         setError('Registration failed. Please try again.');
       }
+    }
+  };
+
+  const getPasswordStrengthMessage = (score) => {
+    switch (score) {
+      case 0:
+        return 'Very Weak';
+      case 1:
+        return 'Weak';
+      case 2:
+        return 'Fair';
+      case 3:
+        return 'Good';
+      case 4:
+        return 'Strong';
+      default:
+        return '';
     }
   };
 
@@ -52,9 +77,10 @@ const RegisterPage = () => {
         <input 
           type="password" 
           value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
+          onChange={handlePasswordChange} 
           required 
         />
+        <p>Password Strength: {getPasswordStrengthMessage(passwordStrength)}</p>
         <button type="submit">Register</button>
         {error && <p>{error}</p>}
         <Link to="/login" className="redirect-link">Already have an account? Login here</Link>

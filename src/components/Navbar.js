@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { removeToken, isAuthenticated, getUser } from '../utils/auth'; // Import getUser for user info
+import { removeToken, isAuthenticated, getUser } from '../utils/auth';
 import { MoonIcon, SunIcon } from 'lucide-react';
 import '../css/Navbar.css';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const loggedIn = isAuthenticated();
-  const user = loggedIn ? getUser() : null; // Get the user info if logged in
+  const user = loggedIn ? getUser() : null;
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false); // Track dropdown state
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleLogout = () => {
     removeToken();
@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
-    document.body.classList.toggle('dark-mode');
+    document.body.classList.toggle('dark-mode', !isDarkMode); // Toggle dark mode on body
   };
 
   const toggleDropdown = () => {
@@ -46,7 +46,6 @@ const Navbar = () => {
                   Create Ad
                 </Link>
               </li>
-              {/* Profile Dropdown */}
               <li className="nav-item profile">
                 <button onClick={toggleDropdown} className="nav-link profile-button">
                   {user ? user.name : 'Profile'}
@@ -81,7 +80,7 @@ const Navbar = () => {
             </>
           )}
           <li className="nav-item">
-            <button onClick={toggleDarkMode} className="nav-link">
+            <button onClick={toggleDarkMode} className="nav-link dark-mode-toggle">
               {isDarkMode ? <SunIcon size={24} /> : <MoonIcon size={24} />}
             </button>
           </li>

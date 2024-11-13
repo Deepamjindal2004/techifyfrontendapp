@@ -1,82 +1,107 @@
 /* src/pages/RegisterPage.css */
 
 .register-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
-    background-color: #f4f6f9;
-    min-height: 100vh;
-  }
-  
-  .register-form {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .register-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #2c3e50;
-  }
-  
-  .register-form label {
-    display: block;
-    margin-bottom: 5px;
-    color: #7f8c8d;
-    font-size: 16px;
-  }
-  
-  .register-form input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #bdc3c7;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 16px;
-  }
-  
-  .register-form input:focus {
-    border-color: #2980b9;
-    outline: none;
-  }
-  
-  .register-form button {
-    width: 100%;
-    padding: 12px;
-    background-color: #27ae60;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .register-form button:hover {
-    background-color: #2ecc71;
-  }
-  
-  .register-form p {
-    color: red;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  
-  .redirect-link {
-    display: block;
-    text-align: center;
-    color: #2980b9;
-    text-decoration: none;
-    font-size: 14px;
-  }
-  
-  .redirect-link:hover {
-    text-decoration: underline;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background-color: #f4f6f9;
+  min-height: 100vh;
+}
+
+.register-form {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.register-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.register-form label {
+  display: block;
+  margin-bottom: 5px;
+  color: #7f8c8d;
+  font-size: 16px;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.register-form input:focus {
+  border-color: #2980b9;
+  outline: none;
+}
+
+.register-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-form button:hover {
+  background-color: #2ecc71;
+}
+
+.register-form p {
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.redirect-link {
+  display: block;
+  text-align: center;
+  color: #2980b9;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.redirect-link:hover {
+  text-decoration: underline;
+}
+
+/* Password Strength Styles */
+.password-strength {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.password-strength.very-weak {
+  color: red;
+}
+
+.password-strength.weak {
+  color: orange;
+}
+
+.password-strength.fair {
+  color: yellow;
+}
+
+.password-strength.good {
+  color: lightgreen;
+}
+
+.password-strength.strong {
+  color: green;
+}
