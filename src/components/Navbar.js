@@ -66,7 +66,8 @@ const Navbar = () => {
                       <Link to="/settings" className="dropdown-item">Settings</Link>
                     </li>
                     <li>
-                      <button onClick={handleLogout} className="dropdown-item">Logout</button>
+                      {/* <button onClick={handleLogout} className="dropdown-item">Logout</button> */}
+                      <Link onClick={handleLogout} className="dropdown-item">Logout</Link>
                     </li>
                   </ul>
                 )}
