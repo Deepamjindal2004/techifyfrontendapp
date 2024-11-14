@@ -29,8 +29,15 @@ const Navbar = () => {
     <nav className={`navbar ${isDarkMode ? 'dark-mode' : ''}`}>
       <div className="navbar-container">
         <div className="navbar-brand">
-          <Link to="/">
-            <h1 className="navbar-logo">Techify</h1>
+          <Link to="/" className="navbar-logo-container">
+            {/* Image logo */}
+            <img 
+              src="/techifylogo.jpg" // Path to your logo image
+              alt="Techify" // Alt text for accessibility
+              className="navbar-logo" // Class for styling
+            />
+            {/* Text alongside the logo */}
+            <h1 className="navbar-text">Techify</h1>
           </Link>
         </div>
         <ul className="navbar-nav">
