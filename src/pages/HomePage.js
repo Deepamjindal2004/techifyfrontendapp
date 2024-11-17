@@ -26,6 +26,10 @@ const HomePage = () => {
       <div className="ads-list">
         {ads.map((ad) => (
           <div className="ad-card" key={ad._id}>
+            {/* Display the ad image if available */}
+            <div className="ad-image-container">
+              {ad.image && <img src={ad.image} alt={ad.title} className="ad-image-preview" />}
+            </div>
             <h3>{ad.title}</h3>
             <p>{ad.description.length > 100 ? `${ad.description.substring(0, 100)}...` : ad.description}</p>
             <p className="price">Price: ${ad.price}</p>

@@ -30,28 +30,22 @@ const Navbar = () => {
       <div className="navbar-container">
         <div className="navbar-brand">
           <Link to="/" className="navbar-logo-container">
-            {/* Image logo */}
             <img 
-              src="/techifylogo.jpg" // Path to your logo image
-              alt="Techify" // Alt text for accessibility
-              className="navbar-logo" // Class for styling
+              src="/techifylogo.jpg"
+              alt="Techify"
+              className="navbar-logo"
             />
-            {/* Text alongside the logo */}
             <h1 className="navbar-text">Techify</h1>
           </Link>
         </div>
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link to="/" className="nav-link">
-              Home
-            </Link>
+            <Link to="/" className="nav-link">Home</Link>
           </li>
           {loggedIn ? (
             <>
               <li className="nav-item">
-                <Link to="/ad/new" className="nav-link">
-                  Create Ad
-                </Link>
+                <Link to="/ad/new" className="nav-link">Create Ad</Link>
               </li>
               <li className="nav-item profile">
                 <button onClick={toggleDropdown} className="nav-link profile-button">
@@ -63,10 +57,6 @@ const Navbar = () => {
                       <Link to="/profile" className="dropdown-item">Profile</Link>
                     </li>
                     <li>
-                      <Link to="/settings" className="dropdown-item">Settings</Link>
-                    </li>
-                    <li>
-                      {/* <button onClick={handleLogout} className="dropdown-item">Logout</button> */}
                       <Link onClick={handleLogout} className="dropdown-item">Logout</Link>
                     </li>
                   </ul>
@@ -76,14 +66,10 @@ const Navbar = () => {
           ) : (
             <>
               <li className="nav-item">
-                <Link to="/login" className="nav-link">
-                  Login
-                </Link>
+                <Link to="/login" className="nav-link">Login</Link>
               </li>
               <li className="nav-item">
-                <Link to="/register" className="nav-link">
-                  Register
-                </Link>
+                <Link to="/register" className="nav-link">Register</Link>
               </li>
             </>
           )}
