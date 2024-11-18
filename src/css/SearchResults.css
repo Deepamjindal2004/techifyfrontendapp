@@ -1,0 +1,25 @@
+.search-results-container {
+    padding: 2rem;
+  }
+  
+  .search-results-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .search-result-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .search-result-item h3 {
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .view-details-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  

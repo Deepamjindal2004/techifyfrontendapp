@@ -8,6 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import AdDetails from './pages/AdDetails';
 import AdForm from './pages/AdForm';
 import ProtectedRoute from './components/ProtectedRoute';
+import SearchResults from './pages/SearchResults'; // Import SearchResults
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/ad/:id" element={<AdDetails />} />
+          <Route path="/search" element={<SearchResults />} />
           <Route 
             path="/ad/new" 
             element={

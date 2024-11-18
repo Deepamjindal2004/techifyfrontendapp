@@ -10,6 +10,7 @@ const Navbar = () => {
   const user = loggedIn ? getUser() : null;
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleLogout = () => {
     removeToken();
@@ -25,6 +26,17 @@ const Navbar = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/search?query=${searchTerm}`);
+    }
+  };
+
   return (
     <nav className={`navbar ${isDarkMode ? 'dark-mode' : ''}`}>
       <div className="navbar-container">
@@ -38,6 +50,16 @@ const Navbar = () => {
             <h1 className="navbar-text">Techify</h1>
           </Link>
         </div>
+        <form className="search-bar" onSubmit={handleSearchSubmit}>
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Search listings..."
+            className="search-input"
+          />
+          <button type="submit" className="search-button">Search</button>
+        </form>
         <ul className="navbar-nav">
           <li className="nav-item">
             <Link to="/" className="nav-link">Home</Link>
