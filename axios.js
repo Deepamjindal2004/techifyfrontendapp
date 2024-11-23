@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:3000',  // Your backend URL
+    baseURL: 'https://techifybackendapi.onrender.com/',  // Your backend URL
 });
 
 export default axiosInstance;
