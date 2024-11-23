@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Set Axios default base URL
-axios.defaults.baseURL = 'http://localhost:3000/api';
+axios.defaults.baseURL = 'https://techifybackendapi.onrender.com/api';
 
 // Function to set token in local storage
 export const setToken = (token) => {
